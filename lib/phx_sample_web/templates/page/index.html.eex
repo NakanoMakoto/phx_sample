@@ -1,0 +1,33 @@
+<section class="phx-hero">
+  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
+  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+<div id="app">
+  <h1>Posts</h1>
+  <table border="1">
+  <tr v-for="result in results">
+      <td style="padding: 10px;">{{ result.title }}</td>
+      <td style="padding: 10px;">{{ result.body }}</td>
+  </tr>
+  </table>
+</div>
+
+<script>
+    var app = new Vue
+    ( {
+        el: '#app',
+        data: 
+        {
+            results: [], 
+        }, 
+        mounted()
+        {
+            axios.get( 'posts' )
+            .then( response => { this.results = response.data.data } )
+        }, 
+    } )
+</script>
